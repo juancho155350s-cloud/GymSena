@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#00324D">
     <title><?= htmlspecialchars($title ?? 'GymSENA - Gestión Profesional') ?></title>
     
-    <link rel="icon" type="image/svg+xml" href="/icons/logo-sena-oficial.svg">
+    <link rel="icon" type="image/svg+xml" href="/images/logo-sena-oficial.svg">
     <link rel="stylesheet" href="/css/style.css?v=3">
 </head>
 <body class="dashboard-body">
@@ -16,7 +16,7 @@
         <!-- Cabecera de la Barra Lateral con Logo Oficial SENA -->
         <div class="sidebar-header">
             <div class="sidebar-logo-box">
-                <img src="/icons/logo-sena-verde.svg" alt="SENA Logo Oficial" class="sidebar-sena-logo">
+                <img src="/images/logo-sena-verde.svg" alt="SENA Logo Oficial" class="sidebar-sena-logo">
             </div>
             <div class="sidebar-brand-text">
                 <span class="sidebar-brand-title">GymSENA</span>

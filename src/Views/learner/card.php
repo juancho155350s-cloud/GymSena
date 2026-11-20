@@ -48,7 +48,7 @@ $fechaExpedicion = date('d/m/Y');
             <!-- Cabecera Institucional Oficial -->
             <div class="card-header-institutional">
                 <div class="card-header-logo-row">
-                    <img src="/icons/logo-sena-blanco.svg" alt="SENA" class="card-header-logo">
+                    <img src="/images/logo-sena-blanco.svg" alt="SENA" class="card-header-logo">
                     <div class="card-header-text">
                         <span class="card-country-label">REPÚBLICA DE COLOMBIA</span>
                         <h4 class="card-sena-entity-title">SERVICIO NACIONAL DE APRENDIZAJE</h4>

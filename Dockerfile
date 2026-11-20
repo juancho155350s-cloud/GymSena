@@ -6,6 +6,10 @@ RUN docker-php-ext-install pdo pdo_mysql
 # Activar mod_rewrite y mod_headers en Apache
 RUN a2enmod rewrite headers
 
+# Desactivar alias reservado de Apache /icons/ para evitar colisiones
+RUN sed -i 's|Alias /icons/|# Alias /icons/|g' /etc/apache2/mods-available/alias.conf 2>/dev/null || true \
+    && sed -i 's|Alias /icons/|# Alias /icons/|g' /etc/apache2/mods-enabled/alias.conf 2>/dev/null || true
+
 # Configurar VirtualHost apuntando a /public con AllowOverride All
 RUN printf '<VirtualHost *:80>\n\
     ServerName localhost\n\
@@ -26,7 +30,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html/
 
 # Asignar permisos al usuario web de Apache
-RUN mkdir -p /var/www/html/data && chown -R www-data:www-data /var/www/html/data
+RUN mkdir -p /var/www/html/data && chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
 CMD ["apache2-foreground"]

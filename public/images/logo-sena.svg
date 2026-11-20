@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <!-- Fondo y Geometría Oficial del Logotipo SENA -->
+  <g fill="#39A900">
+    <!-- Cabeza -->
+    <circle cx="200" cy="95" r="32"/>
+    <!-- Brazos y Torso Estilizados -->
+    <path d="M200 145 C150 145 105 185 92 235 C115 235 155 220 185 200 L185 340 L215 340 L215 200 C245 220 285 235 308 235 C295 185 250 145 200 145 Z"/>
+    <!-- Base / Pasos Inferiores -->
+    <path d="M125 355 L165 355 L180 325 L140 325 Z"/>
+    <path d="M275 355 L235 355 L220 325 L260 325 Z"/>
+  </g>
+</svg>
+

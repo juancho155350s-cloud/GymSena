@@ -7,7 +7,7 @@
             
             <!-- Barra Superior Institucional -->
             <div class="split-hero-brand">
-                <img src="/icons/logo-sena-blanco.svg" alt="SENA Colombia" class="split-hero-logo">
+                <img src="/images/logo-sena-blanco.svg" alt="SENA Colombia" class="split-hero-logo">
                 <div class="split-hero-brand-text">
                     <span class="split-hero-title">GymSENA</span>
                     <span class="split-hero-badge">Bienestar al Aprendiz</span>
@@ -75,7 +75,7 @@
             
             <!-- Encabezado para pantallas móviles o compactas -->
             <div class="split-mobile-header">
-                <img src="/icons/logo-sena-verde.svg" alt="SENA" class="split-mobile-logo">
+                <img src="/images/logo-sena-verde.svg" alt="SENA" class="split-mobile-logo">
                 <h2>GymSENA</h2>
             </div>
 
@@ -125,7 +125,6 @@
                                name="email" 
                                class="field-input" 
                                placeholder="usuario@sena.edu.co" 
-                               value="monitor@sena.edu.co"
                                autocomplete="username"
                                required 
                                autofocus>
@@ -144,7 +143,6 @@
                                name="password" 
                                class="field-input" 
                                placeholder="••••••••" 
-                               value="monitor123"
                                autocomplete="current-password"
                                required>
                         <button type="button" class="field-toggle-btn" onclick="togglePasswordVisibility()" aria-label="Mostrar u ocultar contraseña">

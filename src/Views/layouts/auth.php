@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#00324D">
     <title><?= htmlspecialchars($title ?? 'GymSENA - Iniciar Sesión') ?></title>
     
-    <link rel="icon" type="image/svg+xml" href="/icons/logo-sena-oficial.svg">
+    <link rel="icon" type="image/svg+xml" href="/images/logo-sena-oficial.svg">
     <link rel="stylesheet" href="/css/style.css?v=3">
 </head>
 <body class="split-auth-body">

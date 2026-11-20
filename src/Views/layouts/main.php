@@ -13,8 +13,8 @@
     
     <!-- Manifest PWA -->
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" type="image/svg+xml" href="/icons/logo-sena-oficial.svg">
-    <link rel="apple-touch-icon" href="/icons/logo-sena-oficial.svg">
+    <link rel="icon" type="image/svg+xml" href="/images/logo-sena-oficial.svg">
+    <link rel="apple-touch-icon" href="/images/logo-sena-oficial.svg">
 
     <!-- Estilos Mobile-First & Human-Centered UX SENA -->
     <link rel="stylesheet" href="/css/style.css?v=3">
@@ -25,7 +25,7 @@
         <div class="nav-container">
             <a href="/acceso" class="nav-brand" title="GymSENA Inicio">
                 <div class="sena-logo-box">
-                    <img src="/icons/logo-sena-oficial.svg" alt="SENA Logo Oficial" class="sena-logo-img">
+                    <img src="/images/logo-sena-oficial.svg" alt="SENA Logo Oficial" class="sena-logo-img">
                 </div>
                 <div class="brand-text">
                     <span class="brand-title">

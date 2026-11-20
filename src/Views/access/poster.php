@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cartel Oficial de Entrada - GymSENA</title>
-    <link rel="icon" type="image/svg+xml" href="/icons/logo-sena-oficial.svg">
+    <link rel="icon" type="image/svg+xml" href="/images/logo-sena-oficial.svg">
     <link rel="stylesheet" href="/css/style.css?v=4">
     <link rel="stylesheet" href="/css/poster.css?v=2">
 </head>
@@ -27,7 +27,7 @@
         
         <!-- Encabezado Institucional SENA -->
         <header class="poster-header">
-            <img src="/icons/logo-sena-oficial.svg" alt="Logotipo Oficial SENA" class="poster-logo">
+            <img src="/images/logo-sena-oficial.svg" alt="Logotipo Oficial SENA" class="poster-logo">
             <div class="poster-header-text">
                 <p class="poster-inst-title">Servicio Nacional de Aprendizaje &bull; SENA</p>
                 <h1 class="poster-brand-title">Gym<span>SENA</span></h1>
