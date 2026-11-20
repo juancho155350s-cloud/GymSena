@@ -6,6 +6,14 @@ class Auth
     public static function startSession(): void
     {
         if (session_status() === PHP_SESSION_NONE) {
+            // Endurecimiento de seguridad en cookies de sesión
+            ini_set('session.cookie_httponly', '1');
+            ini_set('session.use_only_cookies', '1');
+            ini_set('session.cookie_samesite', 'Lax');
+            if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+                ini_set('session.cookie_secure', '1');
+            }
+
             $defaultSavePath = session_save_path() ?: sys_get_temp_dir();
             if (!is_writable($defaultSavePath)) {
                 $customSessionDir = dirname(__DIR__, 2) . '/data/sessions';
@@ -25,6 +33,7 @@ class Auth
     public static function loginUser(array $user): void
     {
         self::startSession();
+        @session_regenerate_id(true);
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['nombre_completo'];
         $_SESSION['user_email'] = $user['email'];
@@ -36,6 +45,7 @@ class Auth
     public static function loginLearner(array $learner): void
     {
         self::startSession();
+        @session_regenerate_id(true);
         $_SESSION['learner_id'] = $learner['id'];
         $_SESSION['learner_document'] = $learner['documento'];
         $_SESSION['learner_name'] = $learner['nombres'] . ' ' . $learner['apellidos'];
@@ -111,6 +121,24 @@ class Auth
             );
         }
         session_destroy();
+    }
+
+    public static function csrfToken(): string
+    {
+        self::startSession();
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION['csrf_token'];
+    }
+
+    public static function validateCsrfToken(?string $token): bool
+    {
+        self::startSession();
+        if (empty($_SESSION['csrf_token']) || empty($token)) {
+            return false;
+        }
+        return hash_equals($_SESSION['csrf_token'], $token);
     }
 }
 

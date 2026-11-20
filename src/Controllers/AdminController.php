@@ -47,6 +47,11 @@ class AdminController
     {
         Auth::requireRole('ADMINISTRADOR');
 
+        if (!Auth::validateCsrfToken($request->post('csrf_token'))) {
+            Response::redirect('/admin?error=' . urlencode('Sesión expirada o solicitud no válida'));
+            return;
+        }
+
         $gymId = (int)($request->post('gym_id') ?: 1);
         $capacity = (int)($request->post('capacidad_maxima') ?: 30);
 
@@ -113,6 +118,11 @@ class AdminController
     {
         Auth::requireRole('ADMINISTRADOR');
 
+        if (!Auth::validateCsrfToken($request->post('csrf_token'))) {
+            Response::redirect('/admin?error=' . urlencode('Sesión expirada o solicitud no válida'));
+            return;
+        }
+
         if (empty($_FILES['archivo_excel']['tmp_name'])) {
             Response::redirect('/admin?error=' . urlencode('No se subió ningún archivo'));
         }
@@ -157,6 +167,11 @@ class AdminController
     {
         Auth::requireRole('ADMINISTRADOR');
 
+        if (!Auth::validateCsrfToken($request->post('csrf_token'))) {
+            Response::redirect('/admin?error=' . urlencode('Sesión expirada o solicitud no válida'));
+            return;
+        }
+
         $doc = trim($request->post('documento') ?: '');
         $nombre = trim($request->post('nombre_completo') ?: '');
         $email = strtolower(trim($request->post('email') ?: ''));
@@ -190,6 +205,12 @@ class AdminController
     public function toggleTrainer(Request $request, array $params): void
     {
         Auth::requireRole('ADMINISTRADOR');
+
+        if (!Auth::validateCsrfToken($request->post('csrf_token'))) {
+            Response::redirect('/admin?error=' . urlencode('Sesión expirada o solicitud no válida'));
+            return;
+        }
+
         $id = (int)($params['id'] ?? 0);
         if ($id > 0) {
             User::toggleStatus($id);
@@ -200,6 +221,12 @@ class AdminController
     public function deleteTrainer(Request $request, array $params): void
     {
         Auth::requireRole('ADMINISTRADOR');
+
+        if (!Auth::validateCsrfToken($request->post('csrf_token'))) {
+            Response::redirect('/admin?error=' . urlencode('Sesión expirada o solicitud no válida'));
+            return;
+        }
+
         $id = (int)($params['id'] ?? 0);
         if ($id > 0) {
             User::delete($id);

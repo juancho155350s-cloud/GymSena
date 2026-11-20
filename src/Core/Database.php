@@ -48,13 +48,21 @@ class Database
 
     private static function initFallbackStorage(): void
     {
+        if (self::$fallbackFile === null) {
+            $config = require dirname(__DIR__, 2) . '/config/database.php';
+            self::$fallbackFile = $config['fallback_storage_path'];
+        }
+
         $dir = dirname(self::$fallbackFile);
         if (!is_dir($dir)) {
-            mkdir($dir, 0777, true);
+            @mkdir($dir, 0777, true);
         }
 
         if (!file_exists(self::$fallbackFile)) {
-            // Inicializar con la semilla del sistema
+            $adminHash = password_hash('admin123', PASSWORD_DEFAULT);
+            $monitorHash = password_hash('monitor123', PASSWORD_DEFAULT);
+
+            // Semilla limpia de producción
             $seedData = [
                 'sedes' => [
                     [
@@ -91,9 +99,9 @@ class Database
                         'sede_id' => 1,
                         'gimnasio_id' => null,
                         'documento' => '1000000001',
-                        'nombre_completo' => 'Coordinador Bienestar SENA',
+                        'nombre_completo' => 'Instructor Encargado Gimnasio',
                         'email' => 'admin@sena.edu.co',
-                        'password_hash' => '$2y$10$54EKvUi5mybzz7/45W34sei2L/B1p0HD7Khe0UYDDyGHALb1KVwom', // admin123
+                        'password_hash' => $adminHash,
                         'rol' => 'ADMINISTRADOR',
                         'estado' => 'ACTIVO'
                     ],
@@ -102,118 +110,24 @@ class Database
                         'sede_id' => 1,
                         'gimnasio_id' => 1,
                         'documento' => '1000000002',
-                        'nombre_completo' => 'Monitor de Turno Gimnasio',
+                        'nombre_completo' => 'Pasante Entrenador de Sala',
                         'email' => 'monitor@sena.edu.co',
-                        'password_hash' => '$2y$10$pggjfg3hxCSREuRFqVHZAeSF/esnwxAdlobaivpH2edVagO2kW5uq', // monitor123
+                        'password_hash' => $monitorHash,
                         'rol' => 'MONITOR',
                         'estado' => 'ACTIVO'
                     ]
                 ],
-                'aprendices' => [
-                    [
-                        'id' => 1,
-                        'sede_id' => 1,
-                        'tipo_documento' => 'CC',
-                        'documento' => '1020304050',
-                        'nombres' => 'Carlos Andrés',
-                        'apellidos' => 'Gómez Pérez',
-                        'ficha' => '2694520',
-                        'programa_formacion' => 'Análisis y Desarrollo de Software (ADSO)',
-                        'correo' => 'carlos.gomez@soy.sena.edu.co',
-                        'telefono' => '3001234567',
-                        'contacto_emergencia_nombre' => 'Marta Pérez (Madre)',
-                        'contacto_emergencia_telefono' => '3119876543',
-                        'estado_formacion' => 'LECTIVA',
-                        'activo' => 1,
-                        'token_acceso' => 'tok_carlos_2694520',
-                        'creado_en' => date('Y-m-d H:i:s')
-                    ],
-                    [
-                        'id' => 2,
-                        'sede_id' => 1,
-                        'tipo_documento' => 'CC',
-                        'documento' => '1030405060',
-                        'nombres' => 'Laura Valentina',
-                        'apellidos' => 'Restrepo Zapata',
-                        'ficha' => '2694520',
-                        'programa_formacion' => 'Análisis y Desarrollo de Software (ADSO)',
-                        'correo' => 'laura.restrepo@soy.sena.edu.co',
-                        'telefono' => '3104567890',
-                        'contacto_emergencia_nombre' => 'Jorge Restrepo (Padre)',
-                        'contacto_emergencia_telefono' => '3123456789',
-                        'estado_formacion' => 'LECTIVA',
-                        'activo' => 1,
-                        'token_acceso' => 'tok_laura_2694520',
-                        'creado_en' => date('Y-m-d H:i:s')
-                    ],
-                    [
-                        'id' => 3,
-                        'sede_id' => 1,
-                        'tipo_documento' => 'TI',
-                        'documento' => '1040506070',
-                        'nombres' => 'Mateo',
-                        'apellidos' => 'Henao Ramírez',
-                        'ficha' => '2712398',
-                        'programa_formacion' => 'Gestión Contable y de Información Financiera',
-                        'correo' => 'mateo.henao@soy.sena.edu.co',
-                        'telefono' => '3157891234',
-                        'contacto_emergencia_nombre' => 'Gloria Ramírez (Tía)',
-                        'contacto_emergencia_telefono' => '3161239874',
-                        'estado_formacion' => 'LECTIVA',
-                        'activo' => 1,
-                        'token_acceso' => 'tok_mateo_2712398',
-                        'creado_en' => date('Y-m-d H:i:s')
-                    ]
-                ],
-                'consentimientos_ley1581' => [
-                    ['id' => 1, 'aprendiz_id' => 1, 'acepto_politica' => 1, 'ip_registro' => '127.0.0.1', 'version_politica' => 'v1.0-2026', 'fecha_hora_consentimiento' => date('Y-m-d H:i:s')],
-                    ['id' => 2, 'aprendiz_id' => 2, 'acepto_politica' => 1, 'ip_registro' => '127.0.0.1', 'version_politica' => 'v1.0-2026', 'fecha_hora_consentimiento' => date('Y-m-d H:i:s')],
-                    ['id' => 3, 'aprendiz_id' => 3, 'acepto_politica' => 1, 'ip_registro' => '127.0.0.1', 'version_politica' => 'v1.0-2026', 'fecha_hora_consentimiento' => date('Y-m-d H:i:s')]
-                ],
-                'asistencias' => [
-                    [
-                        'id' => 1,
-                        'gimnasio_id' => 1,
-                        'aprendiz_id' => 1,
-                        'fecha' => date('Y-m-d'),
-                        'hora_entrada' => '07:15:00',
-                        'hora_salida' => null,
-                        'duracion_minutos' => null,
-                        'metodo_ingreso' => 'QR_AUTONOMO',
-                        'cierre_automatico' => 0,
-                        'observaciones' => null
-                    ],
-                    [
-                        'id' => 2,
-                        'gimnasio_id' => 1,
-                        'aprendiz_id' => 2,
-                        'fecha' => date('Y-m-d'),
-                        'hora_entrada' => '06:30:00',
-                        'hora_salida' => '07:45:00',
-                        'duracion_minutos' => 75,
-                        'metodo_ingreso' => 'QR_AUTONOMO',
-                        'cierre_automatico' => 0,
-                        'observaciones' => null
-                    ],
-                    [
-                        'id' => 3,
-                        'gimnasio_id' => 1,
-                        'aprendiz_id' => 3,
-                        'fecha' => date('Y-m-d', strtotime('-1 day')),
-                        'hora_entrada' => '08:00:00',
-                        'hora_salida' => '09:15:00',
-                        'duracion_minutos' => 75,
-                        'metodo_ingreso' => 'QR_AUTONOMO',
-                        'cierre_automatico' => 0,
-                        'observaciones' => null
-                    ]
-                ],
+                'aprendices' => [],
+                'consentimientos_ley1581' => [],
+                'asistencias' => [],
                 'novedades_sanciones' => []
             ];
-            file_put_contents(self::$fallbackFile, json_encode($seedData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+            self::atomicWrite(self::$fallbackFile, json_encode($seedData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
             self::$fallbackData = $seedData;
-        } else {
-            self::$fallbackData = json_decode(file_get_contents(self::$fallbackFile), true) ?: [];
+        } elseif (empty(self::$fallbackData)) {
+            $content = @file_get_contents(self::$fallbackFile);
+            self::$fallbackData = $content ? (json_decode($content, true) ?: []) : [];
         }
     }
 
@@ -227,7 +141,33 @@ class Database
     {
         self::initFallbackStorage();
         self::$fallbackData[$table] = $data;
-        file_put_contents(self::$fallbackFile, json_encode(self::$fallbackData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        self::atomicWrite(self::$fallbackFile, json_encode(self::$fallbackData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
+
+    /**
+     * Escritura atómica con bloqueo exclusivo para prevenir condiciones de carrera y corrupción de datos.
+     */
+    private static function atomicWrite(string $filename, string $data): bool
+    {
+        $dir = dirname($filename);
+        $tempFile = $dir . '/.tmp_' . bin2hex(random_bytes(8)) . '.json';
+        
+        $fp = @fopen($tempFile, 'w');
+        if (!$fp) {
+            return false;
+        }
+
+        if (flock($fp, LOCK_EX)) {
+            fwrite($fp, $data);
+            fflush($fp);
+            flock($fp, LOCK_UN);
+            fclose($fp);
+            return @rename($tempFile, $filename);
+        }
+
+        fclose($fp);
+        @unlink($tempFile);
+        return false;
     }
 }
 

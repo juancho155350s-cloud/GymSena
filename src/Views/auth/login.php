@@ -115,6 +115,7 @@
 
             <!-- Formulario Principal -->
             <form action="/login" method="POST" class="auth-clean-form" id="loginForm">
+                <input type="hidden" name="csrf_token" value="<?= \GymSena\Core\Auth::csrfToken() ?>">
                 
                 <div class="form-field-group">
                     <label for="email" class="field-label">Correo Electrónico Institucional</label>

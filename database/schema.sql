@@ -108,7 +108,8 @@ CREATE TABLE IF NOT EXISTS `aprendices` (
     CONSTRAINT `fk_aprendiz_sede` FOREIGN KEY (`sede_id`) 
         REFERENCES `sedes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
     INDEX `idx_aprendiz_ficha` (`ficha`),
-    INDEX `idx_aprendiz_documento` (`documento`)
+    INDEX `idx_aprendiz_documento` (`documento`),
+    INDEX `idx_aprendiz_token` (`token_acceso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -----------------------------------------------------------------------------
@@ -146,7 +147,8 @@ CREATE TABLE IF NOT EXISTS `asistencias` (
     CONSTRAINT `fk_asistencia_aprendiz` FOREIGN KEY (`aprendiz_id`) 
         REFERENCES `aprendices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     INDEX `idx_asistencia_fecha` (`fecha`),
-    INDEX `idx_asistencia_abierta` (`gimnasio_id`, `fecha`, `hora_salida`)
+    INDEX `idx_asistencia_abierta` (`gimnasio_id`, `fecha`, `hora_salida`),
+    INDEX `idx_asistencia_aprendiz_fecha` (`aprendiz_id`, `fecha`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -----------------------------------------------------------------------------

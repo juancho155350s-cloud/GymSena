@@ -27,6 +27,29 @@ class AuthController
 
     public function login(Request $request): void
     {
+        Auth::startSession();
+
+        $csrf = $request->post('csrf_token');
+        if (!empty($csrf) && !Auth::validateCsrfToken($csrf)) {
+            Response::redirect('/login?error=sesion_expirada');
+            return;
+        }
+
+        $ip = $request->getIp();
+        $attemptKey = 'login_attempts_' . md5($ip);
+        $attempts = $_SESSION[$attemptKey] ?? ['count' => 0, 'last_attempt' => time()];
+
+        // Bloqueo temporal tras 5 intentos fallidos por IP (Protección anti-fuerza bruta)
+        if ($attempts['count'] >= 5) {
+            $timePassed = time() - $attempts['last_attempt'];
+            if ($timePassed < 60) {
+                Response::redirect('/login?error=demasiados_intentos');
+            } else {
+                // Reiniciar ventana de intentos tras expirar el bloqueo
+                $attempts = ['count' => 0, 'last_attempt' => time()];
+            }
+        }
+
         $email = trim($request->post('email') ?: '');
         $password = trim($request->post('password') ?: '');
 
@@ -36,8 +59,14 @@ class AuthController
 
         $user = User::findByEmail($email);
         if (!$user || !User::verifyPassword($user, $password)) {
+            $attempts['count']++;
+            $attempts['last_attempt'] = time();
+            $_SESSION[$attemptKey] = $attempts;
             Response::redirect('/login?error=credenciales_invalidas');
         }
+
+        // Login exitoso: restablecer intentos
+        unset($_SESSION[$attemptKey]);
 
         User::updateLastLogin($user['id']);
         Auth::loginUser($user);

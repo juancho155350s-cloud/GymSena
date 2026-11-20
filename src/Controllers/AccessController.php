@@ -59,6 +59,21 @@ class AccessController
 
     public function checkUser(Request $request): void
     {
+        // Protección contra escaneo/raspado masivo de documentos (Rate Limiting por IP)
+        Auth::startSession();
+        $ip = $request->getIp();
+        $rateKey = 'rate_check_' . md5($ip);
+        $rateData = $_SESSION[$rateKey] ?? ['count' => 0, 'window' => time()];
+        if (time() - $rateData['window'] > 60) {
+            $rateData = ['count' => 0, 'window' => time()];
+        }
+        $rateData['count']++;
+        $_SESSION[$rateKey] = $rateData;
+        if ($rateData['count'] > 40) {
+            Response::json(['exists' => false, 'message' => 'Demasiadas consultas en poco tiempo. Espera un momento.'], 429);
+            return;
+        }
+
         $doc = trim($request->get('doc') ?: '');
         if (empty($doc)) {
             Response::json(['exists' => false, 'message' => 'Documento requerido'], 400);
@@ -217,7 +232,13 @@ class AccessController
         if (!empty($result['learner'])) {
             Auth::loginLearner($result['learner']);
             if (!empty($result['token'])) {
-                setcookie('gymsena_token', $result['token'], time() + (86400 * 365), '/');
+                setcookie('gymsena_token', $result['token'], [
+                    'expires' => time() + (86400 * 365),
+                    'path' => '/',
+                    'httponly' => true,
+                    'samesite' => 'Lax',
+                    'secure' => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+                ]);
             }
         }
 

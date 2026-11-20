@@ -153,6 +153,7 @@
                 <p class="text-muted small mb-3">Diligencia los datos del aprendiz en pasantía para habilitar su acceso al panel del entrenador:</p>
 
                 <form action="/admin/crear-pasante" method="POST">
+                    <input type="hidden" name="csrf_token" value="<?= \GymSena\Core\Auth::csrfToken() ?>">
                     <div class="flat-form-group">
                         <label for="pasante_doc" class="flat-label">Documento de Identidad</label>
                         <input type="text" 
@@ -241,12 +242,14 @@
                                     </span>
 
                                     <form action="/admin/toggle-pasante/<?= $trainer['id'] ?>" method="POST" class="d-inline">
+                                        <input type="hidden" name="csrf_token" value="<?= \GymSena\Core\Auth::csrfToken() ?>">
                                         <button type="submit" class="btn-subtle-action" title="<?= $isActivo ? 'Pausar acceso' : 'Reactivar acceso' ?>">
                                             <?= $isActivo ? 'Pausar' : 'Activar' ?>
                                         </button>
                                     </form>
 
                                     <form action="/admin/eliminar-pasante/<?= $trainer['id'] ?>" method="POST" onsubmit="return confirm('¿Confirmas eliminar a este pasante del sistema?');" class="d-inline">
+                                        <input type="hidden" name="csrf_token" value="<?= \GymSena\Core\Auth::csrfToken() ?>">
                                         <button type="submit" class="btn-subtle-danger" title="Eliminar cuenta">
                                             <svg class="ui-icon-xs" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
                                         </button>
@@ -267,6 +270,7 @@
             <p class="text-muted small mb-3">Define el cupo máximo de personas simultáneas en el gimnasio:</p>
 
             <form action="/admin/actualizar-config" method="POST">
+                <input type="hidden" name="csrf_token" value="<?= \GymSena\Core\Auth::csrfToken() ?>">
                 <input type="hidden" name="gym_id" value="<?= $gymId ?>">
                 <div class="flat-form-group">
                     <label for="capacidad_maxima" class="flat-label">Capacidad de Sala</label>
@@ -292,6 +296,7 @@
             <p class="text-muted small mb-3">Importa usuarios autorizados para precargar fichas en el sistema:</p>
             
             <form action="/admin/carga-masiva" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?= \GymSena\Core\Auth::csrfToken() ?>">
                 <div class="flat-form-group">
                     <input type="file" name="archivo_excel" accept=".csv" class="flat-input" required>
                 </div>

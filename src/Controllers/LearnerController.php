@@ -84,6 +84,14 @@ class LearnerController
                 escapeshellarg($qrAbsolutePath)
             );
             @shell_exec('python3 -c ' . escapeshellarg($pyScript));
+
+            // Resiliencia y fallback: si python3 no está disponible, utilizar plantilla vectorial oficial
+            if (!file_exists($qrAbsolutePath)) {
+                $fallbackQr = dirname(__DIR__, 2) . '/public/images/qr-entrada-oficial.svg';
+                if (file_exists($fallbackQr)) {
+                    @copy($fallbackQr, $qrAbsolutePath);
+                }
+            }
         }
 
         Response::view('learner/card', [
@@ -95,7 +103,13 @@ class LearnerController
 
     public function logoutLearner(Request $request): void
     {
-        setcookie('gymsena_token', '', time() - 3600, '/');
+        setcookie('gymsena_token', '', [
+            'expires' => time() - 3600,
+            'path' => '/',
+            'httponly' => true,
+            'samesite' => 'Lax',
+            'secure' => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        ]);
         Auth::logout();
         Response::redirect('/acceso?msg=sesion_cerrada');
     }

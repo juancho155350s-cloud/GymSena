@@ -1,5 +1,11 @@
 FROM php:8.2-apache
 
+# Instalar dependencias del sistema y librerías para generación de QR institucional
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    python3-qrcode \
+    && rm -rf /var/lib/apt/lists/*
+
 # Instalar extensiones requeridas de PHP
 RUN docker-php-ext-install pdo pdo_mysql
 
