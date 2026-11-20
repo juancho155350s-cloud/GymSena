@@ -2,8 +2,7 @@
 # GymSENA - Configuración Apache / LiteSpeed para Entornos de Producción
 # ==============================================================================
 
-Options -Indexes
-FollowSymLinks
+Options -Indexes +FollowSymLinks
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
