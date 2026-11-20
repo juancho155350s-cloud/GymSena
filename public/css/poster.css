@@ -1,0 +1,308 @@
+/* =============================================================================
+   GymSENA - Hoja de Estilos para Cartel Oficial de Entrada (Impresión y Pantalla)
+   ============================================================================= */
+
+@page {
+    size: letter portrait;
+    margin: 10mm;
+}
+
+body.poster-body {
+    background-color: #F8FAFC;
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 2rem 1rem;
+    color: #00324D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.poster-controls {
+    max-width: 680px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+}
+
+.poster-print-btn {
+    background-color: var(--sena-green);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 800;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(57, 169, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+.poster-print-btn:hover {
+    background-color: var(--sena-green-hover);
+    transform: translateY(-1px);
+}
+
+.poster-back-btn {
+    background-color: #ffffff;
+    color: var(--sena-blue);
+    border: 1px solid var(--border-flat);
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.poster-back-btn:hover {
+    background-color: #F1F5F9;
+}
+
+/* Lienzo del Cartel Físico (Aspect Ratio Carta / A4) */
+.poster-sheet {
+    background: #ffffff;
+    width: 100%;
+    max-width: 680px;
+    border: 2px solid #CBD5E1;
+    border-top: 10px solid var(--sena-green);
+    border-bottom: 8px solid var(--sena-blue);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 2.5rem 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.poster-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 2px solid #F1F5F9;
+    margin-bottom: 1.5rem;
+}
+
+.poster-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+
+.poster-header-text {
+    text-align: left;
+}
+
+.poster-inst-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #64748B;
+    margin: 0;
+}
+
+.poster-brand-title {
+    font-size: 1.85rem;
+    font-weight: 900;
+    color: var(--sena-blue);
+    line-height: 1.1;
+    margin: 0.2rem 0;
+}
+
+.poster-brand-title span {
+    color: var(--sena-green);
+}
+
+.poster-venue-badge {
+    display: inline-block;
+    background-color: var(--sena-green-subtle);
+    color: var(--sena-green-hover);
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.poster-main-action {
+    margin: 1.25rem 0 1rem;
+}
+
+.poster-cta-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--sena-blue);
+    letter-spacing: -0.5px;
+    margin-bottom: 0.35rem;
+}
+
+.poster-cta-subtitle {
+    font-size: 0.95rem;
+    color: #64748B;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Marco del QR Oficial */
+.poster-qr-frame {
+    display: inline-block;
+    padding: 1.25rem;
+    background: #ffffff;
+    border: 3px solid var(--sena-green);
+    border-radius: var(--radius-lg);
+    margin: 1.25rem auto 0.75rem;
+    box-shadow: 0 4px 16px rgba(0, 50, 77, 0.08);
+    position: relative;
+}
+
+.poster-qr-img {
+    width: 250px;
+    height: 250px;
+    display: block;
+}
+
+.poster-url-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background-color: #F1F5F9;
+    color: var(--sena-blue);
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    margin-top: 0.5rem;
+    letter-spacing: 0.3px;
+}
+
+/* Banner de Usuarios Habilitados (Inclusivo y sin emojis) */
+.poster-audience-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin: 1.5rem 0 1.25rem;
+    padding: 0.85rem;
+    background-color: #F8FAFC;
+    border: 1px solid var(--border-flat);
+    border-radius: var(--radius-md);
+}
+
+.poster-audience-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--sena-blue);
+}
+
+.poster-audience-svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--sena-green);
+    margin-bottom: 0.35rem;
+}
+
+/* 3 Pasos Rápidos */
+.poster-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    text-align: center;
+    margin: 1.25rem 0;
+}
+
+.poster-step {
+    background-color: #ffffff;
+    border: 1px solid #E2E8F0;
+    padding: 0.85rem 0.65rem;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.poster-step-icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--sena-blue);
+    margin-bottom: 0.35rem;
+}
+
+.poster-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background-color: var(--sena-green);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 50%;
+    margin-bottom: 0.35rem;
+}
+
+.poster-step-text {
+    font-size: 0.75rem;
+    color: #475569;
+    line-height: 1.35;
+    font-weight: 600;
+}
+
+.poster-footer {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #CBD5E1;
+    font-size: 0.72rem;
+    color: #64748B;
+    line-height: 1.4;
+}
+
+/* Iconos SVG Utilitarios */
+.svg-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    vertical-align: -0.15em;
+}
+
+/* Modos de Impresión Limpia (@media print) */
+@media print {
+    body.poster-body {
+        background: #ffffff !important;
+        padding: 0 !important;
+    }
+    .poster-controls {
+        display: none !important;
+    }
+    .poster-sheet {
+        border: 2px solid #00324D !important;
+        border-top: 8px solid #39A900 !important;
+        border-bottom: 8px solid #00324D !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+        padding: 1.5rem !important;
+    }
+    .poster-qr-frame {
+        border-color: #39A900 !important;
+        box-shadow: none !important;
+    }
+}
+

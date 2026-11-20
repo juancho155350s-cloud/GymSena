@@ -1,0 +1,52 @@
+# ==============================================================================
+# GymSENA - Plantilla de Configuración Nginx para Servidores VPS / Linux
+# Ubicación sugerida: /etc/nginx/sites-available/gymsena.conf
+# ==============================================================================
+
+server {
+    listen 80;
+    server_name gym.sena.edu.co; # Reemplazar por dominio o IP del Centro SENA
+    root /var/www/gymsena/public;
+    index index.php index.html;
+
+    charset utf-8;
+
+    # Cabeceras de Seguridad HTTP
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    # Enrutamiento Principal al Front Controller
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # Caché y tipos para archivos estáticos (CSS, JS, SVG, Imágenes)
+    location ~* \.(css|js|svg|png|jpg|jpeg|gif|ico|json)$ {
+        expires 30d;
+        add_header Cache-Control "public, no-transform";
+        access_log off;
+        try_files $uri =404;
+    }
+
+    # Procesamiento FastCGI PHP 8.2 / 8.3
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock; # Ajustar según versión de PHP-FPM
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param HTTP_PROXY "";
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+    }
+
+    # Bloquear archivos ocultos (.env, .git, .htaccess)
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+}
+

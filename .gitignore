@@ -1,0 +1,12 @@
+# Entorno y variables secretas
+.env
+
+# Archivos de sistema y editores
+.DS_Store
+Thumbs.db
+*.tmp
+.idea/
+.vscode/
+
+# Logs
+*.log

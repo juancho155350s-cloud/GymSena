@@ -1,0 +1,23 @@
+{
+  "name": "GymSENA - Gimnasio Institucional",
+  "short_name": "GymSENA",
+  "description": "Sistema PWA para el control de acceso, aforo y carné digital del gimnasio SENA",
+  "start_url": "/acceso",
+  "display": "standalone",
+  "background_color": "#00324D",
+  "theme_color": "#39A900",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/logo-sena-oficial.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-sena.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

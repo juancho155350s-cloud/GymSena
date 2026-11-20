@@ -1,0 +1,41 @@
+# ==============================================================================
+# GymSENA - Configuración Apache / LiteSpeed para Entornos de Producción
+# ==============================================================================
+
+Options -Indexes
+FollowSymLinks
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Cabeceras de Seguridad HTTP
+    <IfModule mod_headers.c>
+        Header set X-Content-Type-Options "nosniff"
+        Header set X-Frame-Options "SAMEORIGIN"
+        Header set X-XSS-Protection "1; mode=block"
+        Header set Referrer-Policy "strict-origin-when-cross-origin"
+    </IfModule>
+
+    # Permitir acceso directo a archivos y carpetas estáticas existentes
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Enrutar todo lo demás al Front Controller único
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# Tipos MIME correctos para assets modernos
+<IfModule mod_mime.c>
+    AddType text/css .css
+    AddType application/javascript .js
+    AddType image/svg+xml .svg
+    AddType application/manifest+json .json
+</IfModule>
+
+# Bloquear acceso a archivos sensibles o de configuración
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+

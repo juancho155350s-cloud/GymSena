@@ -1,0 +1,3602 @@
+/* =============================================================================
+   GymSENA - Master Design System: Pure Flat Design 2.0
+   Enfoque Minimalista, Limpio, Ergonómico e Institucional SENA
+   Colores: Verde SENA (#39A900), Azul SENA (#00324D), Fondo Neutro (#F8FAFC)
+   ============================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    /* Paleta Oficial SENA (Colores Planos) */
+    --sena-green: #39A900;
+    --sena-green-hover: #2e8800;
+    --sena-green-light: #eef9e8;
+
+    --sena-blue: #00324D;
+    --sena-blue-dark: #001f30;
+    --sena-blue-light: #0d4b6e;
+    --sena-blue-subtle: #f0f6fa;
+
+    --sena-orange: #FF6B00;
+
+    /* Superficies Flat */
+    --bg-page: #F8FAFC;
+    --bg-card: #FFFFFF;
+    --border-flat: #E2E8F0;
+    --border-hover: #CBD5E1;
+
+    /* Textos */
+    --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --text-main: #0F172A;
+    --text-muted: #64748B;
+    --text-light: #94A3B8;
+
+    /* Estados Planos */
+    --danger: #EF4444;
+    --danger-bg: #FEF2F2;
+    --warning: #F59E0B;
+    --warning-bg: #FFFBEB;
+    --success: #10B981;
+    --info: #0EA5E9;
+
+    /* Dimensiones */
+    --sidebar-width: 250px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-full: 9999px;
+
+    --transition: 0.15s ease;
+}
+
+/* =============================================================================
+   1. Reseteo y Base Tipográfica
+   ============================================================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.965) 0%, rgba(241, 245, 249, 0.975) 100%),
+                url('/images/bg-gym-training.jpg') center/cover fixed;
+    color: var(--text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.4s ease;
+}
+
+a {
+    color: var(--sena-green);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--sena-green-hover);
+}
+
+/* =============================================================================
+   2. Componentes Flat Principales (Tarjetas, Botones, Inputs)
+   ============================================================================= */
+.flat-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-flat);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.flat-form-group {
+    margin-bottom: 1rem;
+}
+
+.flat-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--sena-blue);
+    margin-bottom: 0.35rem;
+}
+
+.flat-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.35rem;
+}
+
+.flat-helper-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.flat-input {
+    width: 100%;
+    padding: 0.75rem 0.95rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    border: 1.5px solid var(--border-flat);
+    border-radius: var(--radius-sm);
+    background-color: #ffffff;
+    color: var(--text-main);
+    transition: border-color var(--transition);
+}
+
+.flat-input:focus {
+    outline: none;
+    border-color: var(--sena-green);
+}
+
+.flat-input-lg {
+    padding: 0.95rem 1.15rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.flat-btn-primary {
+    background-color: var(--sena-green);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1.25rem;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    transition: background-color var(--transition);
+}
+
+.flat-btn-primary:hover {
+    background-color: var(--sena-green-hover);
+    color: #ffffff;
+}
+
+.flat-btn-action {
+    width: 100%;
+    background-color: var(--sena-green);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem;
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color var(--transition);
+}
+
+.flat-btn-action:hover {
+    background-color: var(--sena-green-hover);
+}
+
+.flat-btn-secondary {
+    background-color: transparent;
+    border: 1.5px solid var(--border-flat);
+    color: var(--sena-blue);
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 1.15rem;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.flat-btn-secondary:hover {
+    border-color: var(--sena-blue);
+    background-color: var(--sena-blue-subtle);
+}
+
+.flat-btn-danger-sm {
+    background-color: var(--danger-bg);
+    color: var(--danger);
+    border: 1px solid #FECACA;
+    border-radius: var(--radius-sm);
+    padding: 0.35rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.flat-btn-danger-sm:hover {
+    background-color: var(--danger);
+    color: #ffffff;
+}
+
+/* =============================================================================
+   3. Login Split-Screen Profesional & Creativo (Identidad Institucional SENA)
+   ============================================================================= */
+.split-auth-body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #0F172A;
+    font-family: var(--font-family);
+    overflow-x: hidden;
+}
+
+.split-auth-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Columna Izquierda: Hero & Bienvenida */
+.split-auth-hero {
+    flex: 1.2;
+    position: relative;
+    background: url('/images/bg-gym-dark.jpg') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3.5rem 3.5rem;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.split-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, rgba(0, 50, 77, 0.90) 0%, rgba(15, 23, 42, 0.85) 50%, rgba(57, 169, 0, 0.65) 100%);
+    z-index: 1;
+}
+
+.split-hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 640px;
+}
+
+.split-hero-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.split-hero-logo {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
+}
+
+.split-hero-brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.split-hero-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    line-height: 1;
+}
+
+.split-hero-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #86EFAC;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.split-hero-welcome {
+    margin: auto 0;
+    padding: 2rem 0;
+}
+
+.split-hero-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: rgba(57, 169, 0, 0.25);
+    border: 1px solid rgba(57, 169, 0, 0.6);
+    color: #86EFAC;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+}
+
+.split-hero-headline {
+    font-size: 2.45rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    letter-spacing: -0.8px;
+}
+
+.split-hero-headline span {
+    color: #4ADE80;
+    font-weight: 700;
+}
+
+.split-hero-description {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #E2E8F0;
+    margin-bottom: 2rem;
+    max-width: 540px;
+}
+
+.split-hero-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.split-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.95rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.9rem 1.2rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.25s ease;
+}
+
+.split-feature-item:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(57, 169, 0, 0.5);
+    transform: translateX(4px);
+}
+
+.split-feature-icon {
+    font-size: 1.35rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.split-feature-text strong {
+    display: block;
+    font-size: 0.88rem;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.split-feature-text span {
+    font-size: 0.78rem;
+    color: #CBD5E1;
+    line-height: 1.4;
+    display: block;
+    margin-top: 2px;
+}
+
+.split-hero-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.78rem;
+    color: #94A3B8;
+}
+
+.split-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #E2E8F0;
+    font-weight: 600;
+}
+
+.status-pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #22C55E;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.35);
+    animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+    0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+    70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+.split-version-badge {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    font-weight: 700;
+    color: #CBD5E1;
+}
+
+/* Columna Derecha: Formulario Limpio & Flat */
+.split-auth-form-side {
+    flex: 0.95;
+    background-color: #FAFCFE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2.5rem;
+    position: relative;
+}
+
+.split-form-container {
+    width: 100%;
+    max-width: 440px;
+    margin: auto;
+}
+
+.split-mobile-header {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.split-mobile-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.split-form-heading {
+    margin-bottom: 1.75rem;
+}
+
+.split-form-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.split-form-subtitle {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-top: 0.35rem;
+}
+
+/* Selector de Roles */
+.role-selector-pills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    background: #F1F5F9;
+    padding: 4px;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-flat);
+}
+
+.role-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.role-pill.active {
+    background: #ffffff;
+    color: var(--sena-blue);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-flat);
+}
+
+.role-pill:hover:not(.active) {
+    color: var(--sena-blue);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.role-pill-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+/* Campos de Formulario Flat con Iconos */
+.form-field-group {
+    margin-bottom: 1.25rem;
+}
+
+.field-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--sena-blue);
+    margin-bottom: 0.4rem;
+}
+
+.field-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
+}
+
+.field-hint {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.field-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.field-icon {
+    position: absolute;
+    left: 14px;
+    width: 18px;
+    height: 18px;
+    fill: #94A3B8;
+    pointer-events: none;
+    transition: fill 0.2s ease;
+}
+
+.field-input {
+    width: 100%;
+    padding: 0.78rem 1rem 0.78rem 2.65rem;
+    border: 1.5px solid var(--border-flat);
+    border-radius: var(--radius-sm);
+    font-size: 0.92rem;
+    background-color: #ffffff;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.field-input:focus {
+    border-color: var(--sena-green);
+    box-shadow: 0 0 0 3px rgba(57, 169, 0, 0.15);
+}
+
+.field-input-wrapper:focus-within .field-icon {
+    fill: var(--sena-green);
+}
+
+.field-toggle-btn {
+    position: absolute;
+    right: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.65;
+    transition: opacity 0.2s;
+}
+
+.field-toggle-btn:hover {
+    opacity: 1;
+}
+
+/* Botón Flat Principal SENA */
+.submit-sena-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--sena-green);
+    color: #ffffff;
+    border: none;
+    padding: 0.88rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+.submit-sena-btn:hover {
+    background-color: var(--sena-green-hover);
+    box-shadow: 0 4px 12px rgba(57, 169, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.submit-sena-btn:active {
+    transform: translateY(0);
+}
+
+.btn-arrow {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    transition: transform 0.2s ease;
+}
+
+.submit-sena-btn:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+/* Sección Demo Chips */
+.quick-demo-section {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-flat);
+}
+
+.quick-demo-title {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.quick-demo-chips {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.demo-chip-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    background: #ffffff;
+    border: 1px solid var(--border-flat);
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--sena-blue);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.demo-chip-btn:hover {
+    border-color: var(--sena-green);
+    color: var(--sena-green-hover);
+    background: #F8FAFC;
+    transform: translateY(-1px);
+}
+
+.split-form-footer {
+    margin-top: 1.75rem;
+    text-align: center;
+}
+
+.return-access-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.return-access-link svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+.return-access-link:hover {
+    color: var(--sena-blue);
+}
+
+/* Alertas Flat */
+.flat-alert-error {
+    background-color: var(--danger-bg);
+    border: 1px solid #FECACA;
+    color: #991B1B;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Responsive Split Screen */
+@media (max-width: 960px) {
+    .split-auth-layout {
+        flex-direction: column;
+    }
+    .split-auth-hero {
+        padding: 2.5rem 1.5rem;
+        flex: none;
+    }
+    .split-hero-headline {
+        font-size: 1.85rem;
+    }
+    .split-hero-features {
+        display: none;
+    }
+    .split-auth-form-side {
+        padding: 2.25rem 1.25rem;
+        flex: 1;
+    }
+    .split-mobile-header {
+        display: flex;
+    }
+}
+
+/* =============================================================================
+   4. Barra Lateral (Aside Bar) para Entrenador y Admin
+   ============================================================================= */
+.dashboard-body {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.965) 0%, rgba(241, 245, 249, 0.975) 100%),
+                url('/images/bg-gym-modern.jpg') center/cover fixed;
+    transition: background 0.4s ease;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sena-blue);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    transition: transform var(--transition);
+}
+
+.sidebar-header {
+    padding: 1.25rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-logo-box {
+    width: 38px;
+    height: 38px;
+    background: #ffffff;
+    border-radius: var(--radius-sm);
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sidebar-sena-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sidebar-brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-brand-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.sidebar-brand-tag {
+    font-size: 0.68rem;
+    color: var(--sena-green);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.sidebar-close-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.sidebar-user-card {
+    padding: 0.85rem 1rem;
+    margin: 0.75rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.sidebar-user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    background: var(--sena-green);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-user-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #ffffff;
+    display: block;
+}
+
+.sidebar-user-role {
+    font-size: 0.68rem;
+    color: #94A3B8;
+    text-transform: uppercase;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    overflow-y: auto;
+}
+
+.sidebar-section-title {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #94A3B8;
+    font-weight: 800;
+    margin: 0.75rem 0 0.25rem 0.4rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.75rem;
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background-color var(--transition);
+}
+
+.sidebar-link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-link.active {
+    color: #ffffff;
+    background-color: var(--sena-green);
+}
+
+.sidebar-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+.sidebar-footer {
+    padding: 0.85rem 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    color: #fca5a5;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+}
+
+.sidebar-logout-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ffffff;
+}
+
+/* Área Principal del Dashboard */
+.dashboard-main {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-topbar {
+    background: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--border-flat);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.topbar-toggle-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--sena-blue);
+    cursor: pointer;
+}
+
+.topbar-pretitle {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.topbar-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.live-clock-pill {
+    background: var(--sena-blue-subtle);
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--sena-blue);
+}
+
+.topbar-aforo-indicator {
+    background: var(--sena-green-light);
+    color: var(--sena-green-hover);
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.dashboard-content-area {
+    padding: 1.5rem;
+    flex: 1;
+}
+
+/* =============================================================================
+   5. Métricas y Tabla del Entrenador (Flat Design)
+   ============================================================================= */
+.flat-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.flat-stat-box {
+    background: #ffffff;
+    border: 1px solid var(--border-flat);
+    border-radius: var(--radius-md);
+    padding: 1.15rem;
+}
+
+.flat-stat-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.flat-stat-number {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+    line-height: 1.1;
+    margin: 4px 0;
+}
+
+.flat-stat-sub {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+.flat-action-toolbar {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.flat-search-wrap {
+    flex: 1;
+    min-width: 260px;
+}
+
+.flat-quick-access-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.flat-card-header-simple {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.flat-card-header-simple h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+}
+
+.flat-table-responsive {
+    overflow-x: auto;
+}
+
+.flat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    text-align: left;
+}
+
+.flat-table th {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-flat);
+    background-color: #F8FAFC;
+}
+
+.flat-table td {
+    padding: 0.75rem 0.85rem;
+    border-bottom: 1px solid var(--border-flat);
+}
+
+.flat-table tr:hover {
+    background-color: #F8FAFC;
+}
+
+.flat-chip-green {
+    background-color: var(--sena-green-light);
+    color: var(--sena-green-hover);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+.flat-qr-frame {
+    display: inline-block;
+    padding: 0.5rem;
+    background: #ffffff;
+    border: 1px solid var(--border-flat);
+    border-radius: var(--radius-sm);
+}
+
+.flat-empty-state {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* =============================================================================
+   6. Vista de Acceso del Aprendiz (Flat)
+   ============================================================================= */
+.flat-access-wrap {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.flat-aforo-card {
+    border-top: 4px solid var(--sena-green);
+}
+
+.flat-aforo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.flat-badge-venue {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--sena-blue);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.flat-aforo-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+}
+
+.flat-aforo-counter {
+    text-align: right;
+}
+
+.flat-count-current {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--sena-blue);
+    line-height: 1;
+}
+
+.flat-count-max {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+.flat-progress-track {
+    width: 100%;
+    height: 8px;
+    background-color: #E2E8F0;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin: 1rem 0 0.75rem;
+}
+
+.flat-progress-bar {
+    height: 100%;
+    background-color: var(--sena-green);
+    transition: width 0.3s;
+}
+
+.flat-aforo-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+}
+
+.flat-slots-badge {
+    font-weight: 700;
+}
+
+.badge-available {
+    color: var(--sena-green-hover);
+}
+
+.badge-full {
+    color: var(--danger);
+}
+
+.flat-live-tag {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.flat-user-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.flat-user-avatar {
+    width: 48px;
+    height: 48px;
+    background-color: var(--sena-blue);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+}
+
+.flat-greeting {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--sena-green);
+    text-transform: uppercase;
+}
+
+.flat-tabs-row {
+    display: flex;
+    border-bottom: 2px solid var(--border-flat);
+    margin-bottom: 1.25rem;
+}
+
+.flat-tab-item {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    padding: 0.75rem 0.5rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.flat-tab-item.active {
+    color: var(--sena-blue);
+    border-bottom-color: var(--sena-green);
+}
+
+.flat-tab-pane {
+    display: none;
+}
+
+.flat-tab-pane.active {
+    display: block;
+}
+
+.flat-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.flat-emergency-box {
+    background-color: #FFFBF5;
+    border: 1px solid #FED7AA;
+    border-radius: var(--radius-sm);
+    padding: 0.85rem;
+    margin: 1rem 0;
+}
+
+.flat-emergency-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--sena-orange);
+    margin-bottom: 0.5rem;
+}
+
+.flat-consent-box {
+    background-color: #F8FAFC;
+    border: 1px solid var(--border-flat);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    margin-top: 0.85rem;
+}
+
+.flat-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.flat-checkbox-label input[type="checkbox"] {
+    margin-top: 2px;
+    accent-color: var(--sena-green);
+}
+
+.flat-link-subtle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Selector Ergonómico de Categorías de Usuario (Aprendiz, Instructor, Funcionario, Invitado) */
+.user-category-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+    background-color: #F1F5F9;
+    padding: 4px;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--border-flat);
+}
+
+.category-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.55rem 0.35rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-pill span {
+    font-size: 1.15rem;
+}
+
+.category-pill.active {
+    background-color: #ffffff;
+    color: var(--sena-blue);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-flat);
+}
+
+.category-pill:hover:not(.active) {
+    color: var(--sena-blue);
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Tira de Estado Actual del Usuario en Sala */
+.current-status-strip {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.95rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    margin-top: 0.85rem;
+}
+
+.status-inside {
+    background-color: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+}
+
+.status-outside {
+    background-color: #F8FAFC;
+    border: 1px solid var(--border-flat);
+    color: #475569;
+}
+
+.status-indicator-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dot-green {
+    background-color: #10B981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+    animation: pulseDot 2s infinite;
+}
+
+.dot-gray {
+    background-color: #94A3B8;
+}
+
+.avatar-active-pulse {
+    border: 2px solid #10B981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.btn-checkout-action {
+    background-color: #0284C7 !important;
+}
+
+.btn-checkout-action:hover {
+    background-color: #0369A1 !important;
+}
+
+.btn-checkin-action {
+    background-color: var(--sena-green) !important;
+}
+
+/* =============================================================================
+   7. Adaptación Móvil
+   ============================================================================= */
+@media (max-width: 991px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.open {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 50, 77, 0.4);
+        z-index: 1040;
+    }
+
+    .sidebar-close-btn {
+        display: block;
+    }
+
+    .dashboard-main {
+        margin-left: 0;
+    }
+
+    .topbar-toggle-btn {
+        display: block;
+    }
+}
+
+.text-center { text-align: center; }
+.text-green { color: var(--sena-green); }
+.text-muted { color: var(--text-muted); }
+.small { font-size: 0.8rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+
+
+/* =============================================================================
+   8. Navbar y Navegación Principal Flat (Para vistas de Aprendices)
+   ============================================================================= */
+.navbar {
+    background-color: var(--sena-blue);
+    color: #ffffff;
+    padding: 0.75rem 1.25rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid var(--sena-green);
+}
+
+.nav-container {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.sena-logo-box {
+    width: 36px;
+    height: 36px;
+    background: #ffffff;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+}
+
+.sena-logo {
+    width: 100%;
+    height: 100%;
+}
+
+.sena-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.card-sena-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin: 0 auto 0.5rem;
+    display: block;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.1;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.brand-title-gym {
+    color: #ffffff;
+}
+
+.brand-title-sena {
+    color: var(--sena-green);
+    background: rgba(57, 169, 0, 0.15);
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+
+.brand-sub {
+    font-size: 0.7rem;
+    color: #94A3B8;
+}
+
+.desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .desktop-nav {
+        display: flex;
+    }
+}
+
+.nav-link-btn {
+    color: #cbd5e1;
+    padding: 0.45rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color var(--transition);
+}
+
+.nav-link-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-link-btn.active {
+    color: #ffffff;
+    background-color: var(--sena-green);
+}
+
+.nav-role-badge {
+    background: rgba(255, 107, 0, 0.2);
+    color: #FFA559;
+    border: 1px solid rgba(255, 107, 0, 0.4);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+}
+
+.main-content {
+    flex: 1;
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+}
+
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top: 1px solid var(--border-flat);
+    display: flex;
+    justify-content: space-around;
+    padding: 0.4rem 0.25rem;
+    z-index: 1000;
+}
+
+@media (min-width: 768px) {
+    .mobile-bottom-nav {
+        display: none;
+    }
+}
+
+.mob-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    text-decoration: none;
+}
+
+.mob-nav-icon {
+    font-size: 1.25rem;
+    margin-bottom: 2px;
+}
+
+.mob-nav-item.active {
+    color: var(--sena-green-hover);
+}
+
+.footer-wrap {
+    background-color: var(--sena-blue);
+    color: #94A3B8;
+    padding: 2rem 1rem;
+    margin-top: auto;
+    font-size: 0.8rem;
+    text-align: center;
+    border-top: 3px solid var(--sena-green);
+}
+
+.footer-brand {
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+
+/* =============================================================================
+   9. Estilos Flat para Métricas y Reportes (/admin)
+   ============================================================================= */
+.flat-admin-wrap {
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.flat-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.flat-admin-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+    line-height: 1.2;
+    margin-top: 4px;
+}
+
+.flat-filter-box {
+    padding: 1.15rem;
+}
+
+.flat-filter-fields {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.flat-filter-col {
+    flex: 1;
+    min-width: 150px;
+}
+
+.flat-filter-col-btn {
+    min-width: 130px;
+}
+
+/* Gráfico de Barras Flat */
+.flat-chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.35rem;
+    height: 150px;
+    padding: 1.25rem 0.5rem 0.5rem;
+    background-color: #F8FAFC;
+    border: 1px solid var(--border-flat);
+    border-radius: var(--radius-sm);
+    margin: 0.75rem 0 0.5rem;
+    overflow-x: auto;
+}
+
+.flat-bar-column {
+    flex: 1;
+    min-width: 22px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.flat-bar-fill {
+    width: 100%;
+    background-color: var(--sena-green);
+    border-radius: 3px 3px 0 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    transition: height 0.2s ease;
+}
+
+.flat-bar-number {
+    font-size: 0.65rem;
+    color: #ffffff;
+    font-weight: 800;
+    margin-top: 2px;
+}
+
+.flat-bar-label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.flat-chart-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Ranking de Programas */
+.flat-ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.flat-ranking-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.flat-ranking-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+}
+
+.flat-prog-title {
+    font-weight: 700;
+    color: var(--sena-blue);
+}
+
+.flat-prog-count {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+/* =============================================================================
+   10. Componentes e Iconografía Vectorial SVG (Sin Emoticones)
+   ============================================================================= */
+.ui-icon {
+    display: inline-block;
+    width: 1.15em;
+    height: 1.15em;
+    fill: currentColor;
+    vertical-align: -0.2em;
+    flex-shrink: 0;
+}
+
+.ui-icon-lg {
+    width: 2.25rem;
+    height: 2.25rem;
+    fill: var(--sena-orange);
+}
+
+.alert-svg-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: currentColor;
+    margin-right: 0.35rem;
+}
+
+.tab-svg-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: currentColor;
+    margin-right: 0.35rem;
+    vertical-align: -0.2em;
+}
+
+.cat-svg-icon {
+    width: 1.35rem;
+    height: 1.35rem;
+    fill: currentColor;
+    margin-bottom: 0.2rem;
+}
+
+.role-pill-svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: currentColor;
+    margin-right: 0.35rem;
+    vertical-align: -0.2em;
+}
+
+.feature-svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    fill: #4ADE80;
+}
+
+.field-eye-svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: #64748B;
+}
+
+.demo-chip-svg {
+    width: 1rem;
+    height: 1rem;
+    fill: currentColor;
+}
+
+.mob-nav-svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    fill: currentColor;
+    margin-bottom: 2px;
+}
+
+.form-hint-block {
+    margin-top: 4px;
+    display: block;
+}
+
+/* Vista Previa de Cartel QR en Panel del Monitor */
+.qr-preview-wrapper {
+    margin: 1.5rem auto;
+    display: inline-block;
+}
+
+.flat-qr-frame {
+    padding: 1rem;
+    background: #ffffff;
+    border: 2px solid var(--sena-green);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 50, 77, 0.08);
+    display: inline-block;
+}
+
+.qr-preview-img {
+    width: 200px;
+    height: 200px;
+    display: block;
+}
+
+.qr-preview-url {
+    margin-top: 0.5rem;
+}
+
+.qr-actions-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.qr-btn-link {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Clases de Tarjetas de Resultado y Celebración */
+.result-celebration-title {
+    color: var(--sena-blue);
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-top: 0.35rem;
+}
+
+.result-celebration-subtitle {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+.result-detail-max {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.result-detail-unit {
+    font-size: 0.85rem;
+}
+
+.result-message-text {
+    color: var(--text-main);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.result-actions-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.result-badge-svg {
+    width: 28px;
+    height: 28px;
+    fill: #ffffff;
+}
+
+.result-celebration-title-error {
+    color: var(--sena-blue);
+    font-weight: 800;
+    font-size: 1.35rem;
+    margin-top: 0.35rem;
+}
+
+.result-alert-box {
+    margin: 1.25rem 0;
+    text-align: left;
+}
+
+/* Clases de Historial del Aprendiz */
+.learner-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.stat-center-card {
+    margin-bottom: 0;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-meta-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+}
+
+.stat-meta-val-blue {
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: var(--sena-blue);
+}
+
+.stat-meta-val-green {
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: var(--sena-green);
+}
+
+.stat-meta-val-orange {
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: var(--sena-orange);
+}
+
+.history-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.history-title {
+    color: var(--sena-blue);
+    font-weight: 800;
+    font-size: 1.15rem;
+}
+
+.history-badge {
+    font-size: 0.8rem;
+    background: var(--sena-blue-subtle);
+    color: var(--sena-blue);
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+}
+
+.history-empty-wrap {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--text-muted);
+}
+
+.empty-state-svg {
+    width: 48px;
+    height: 48px;
+    fill: #CBD5E1;
+    margin-bottom: 0.75rem;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.history-th-row {
+    border-bottom: 2px solid var(--border-light);
+    color: var(--text-muted);
+}
+
+.history-th-row th {
+    padding: 0.75rem;
+}
+
+.history-tr-row {
+    border-bottom: 1px solid var(--border-light);
+}
+
+.history-tr-row td {
+    padding: 0.75rem;
+}
+
+.status-en-sala {
+    color: var(--warning);
+    font-weight: 700;
+}
+
+.badge-pill-warning {
+    background: var(--warning-bg);
+    color: #b45309;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.badge-pill-info {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.badge-pill-success {
+    background: var(--sena-green-subtle);
+    color: var(--sena-green-hover);
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.footer-legal-text {
+    margin-top: 4px;
+    font-size: 0.75rem;
+    color: #94A3B8;
+}
+
+.nav-logout-link {
+    color: #fca5a5 !important;
+}
+
+/* ========================================================
+   SISTEMA DE AUTO-DETECCIÓN INTELIGENTE DE ACCESO (QR)
+   ======================================================== */
+.smart-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.smart-detect-indicator {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.icon-search-pulse {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    opacity: 0.6;
+}
+
+.detection-feedback-box {
+    margin-top: 8px;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    transition: all 0.25s ease;
+}
+
+.detection-feedback-box.hidden {
+    display: none;
+}
+
+.detection-feedback-box.feedback-registered {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+}
+
+.detection-feedback-box.feedback-new {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+}
+
+.auto-detect-alert {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 1.25rem;
+    color: #166534;
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.auto-detect-alert p {
+    margin: 4px 0 0 0;
+    color: #15803d;
+}
+
+.auto-detect-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #bbf7d0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #166534;
+}
+
+.btn-text-link {
+    background: none;
+    border: none;
+    color: var(--sena-green-hover);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s ease;
+}
+
+.btn-text-link:hover {
+    background: var(--sena-green-subtle);
+}
+
+.user-quick-links {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-subtle-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #f1f5f9;
+    color: var(--sena-blue);
+    border: 1px solid var(--border-light);
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-subtle-pill:hover {
+    background: #e2e8f0;
+    border-color: #cbd5e1;
+    color: var(--sena-blue-dark);
+}
+
+/* ========================================================
+   CARNÉ DIGITAL INSTITUCIONAL SENA DE ALTA SEGURIDAD
+   ======================================================== */
+.carnet-view-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 1rem 0 2.5rem;
+}
+
+.carnet-top-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.btn-subtle-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--sena-blue);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s ease;
+}
+
+.btn-subtle-back:hover {
+    background: rgba(0, 50, 77, 0.06);
+}
+
+.carnet-action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-action-print {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    color: var(--sena-blue);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.btn-action-print:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.btn-action-access {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--sena-green);
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.btn-action-access:hover {
+    background: var(--sena-green-hover);
+}
+
+/* Marco del carné */
+.sena-id-card-frame {
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.sena-id-card {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 50, 77, 0.12), 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 2px solid rgba(57, 169, 0, 0.25);
+    color: #1e293b;
+    font-family: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sena-id-card:hover {
+    box-shadow: 0 16px 36px rgba(0, 50, 77, 0.16), 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.card-security-pattern {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: radial-gradient(var(--sena-blue) 1.5px, transparent 1.5px), radial-gradient(var(--sena-green) 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    z-index: 1;
+}
+
+/* Cabecera del carné */
+.card-header-institutional {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, var(--sena-blue-dark) 0%, var(--sena-blue) 70%, #034b73 100%);
+    color: #ffffff;
+    padding: 16px 20px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.card-header-logo {
+    width: 38px;
+    height: 38px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
+.card-header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-country-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.card-sena-entity-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin: 1px 0;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+}
+
+.card-gym-facility-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #86efac;
+    letter-spacing: 0.04em;
+}
+
+.card-security-chip-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.security-chip-svg {
+    width: 26px;
+    height: 26px;
+}
+
+.chip-text-label {
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Línea de acento metálica */
+.card-metallic-accent-line {
+    height: 4px;
+    background: linear-gradient(90deg, var(--sena-green) 0%, #a3e635 50%, var(--sena-orange) 100%);
+}
+
+/* Cuerpo del carné */
+.card-body-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-profile-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.card-avatar-ring {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--sena-green), var(--sena-blue));
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.card-avatar-initials {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+}
+
+.card-status-pulsar-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #22c55e;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.35);
+}
+
+.card-user-identification {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.card-category-badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.card-category-badge.role-theme-aprendiz {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+}
+
+.card-category-badge.role-theme-instructor {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+.card-category-badge.role-theme-funcionario {
+    background: #f0fdfa;
+    color: #0f766e;
+    border: 1px solid #99f6e4;
+}
+
+.card-category-badge.role-theme-invitado {
+    background: #f8fafc;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+
+.card-user-full-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+    line-height: 1.25;
+    margin: 2px 0;
+}
+
+.card-document-number {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.doc-type-pill {
+    background: #f1f5f9;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+
+.doc-num-val {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #334155;
+    letter-spacing: 0.03em;
+}
+
+/* Rejilla de metadatos */
+.card-meta-details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+}
+
+.card-meta-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.meta-field-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.04em;
+}
+
+.meta-field-value {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.card-status-approved {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #15803d;
+    font-weight: 700;
+    font-size: 0.78rem;
+}
+
+.card-emergency-field {
+    border-top: 1px dashed #e2e8f0;
+    padding-top: 6px;
+    margin-top: 2px;
+}
+
+/* Módulo QR del carné */
+.card-qr-validation-module {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-sm);
+    padding: 12px;
+}
+
+.card-qr-frame {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-qr-vector-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.card-qr-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.qr-verify-caption {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--sena-blue);
+}
+
+.qr-token-hash {
+    font-family: monospace;
+    font-size: 0.78rem;
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #334155;
+    font-weight: 700;
+    align-self: flex-start;
+}
+
+.qr-instructions {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+/* Pie del carné */
+.card-footer-strip {
+    position: relative;
+    z-index: 2;
+    background: #f1f5f9;
+    border-top: 1px solid #e2e8f0;
+    padding: 8px 16px;
+    font-size: 0.68rem;
+    color: #64748b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.carnet-guide-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-top: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.guide-card-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(0, 50, 77, 0.08);
+    color: var(--sena-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.guide-card-body h4 {
+    margin: 0 0 4px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--sena-blue);
+}
+
+.guide-card-body p {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+}
+
+/* ========================================================
+   VISTA DE HISTORIAL EJECUTIVO DEL APRENDIZ
+   ======================================================== */
+.learner-history-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+.history-profile-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.history-profile-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.history-avatar-box {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--sena-blue);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0, 50, 77, 0.2);
+}
+
+.history-avatar-box.role-theme-instructor {
+    background: #1d4ed8;
+}
+
+.history-avatar-box.role-theme-funcionario {
+    background: #0f766e;
+}
+
+.history-avatar-box.role-theme-invitado {
+    background: #475569;
+}
+
+.history-profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.history-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.history-status-active {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #15803d;
+}
+
+.history-user-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.history-user-meta {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.meta-separator {
+    color: #cbd5e1;
+}
+
+.history-profile-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-action-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--sena-green);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.btn-action-primary:hover {
+    background: var(--sena-green-hover);
+}
+
+.btn-action-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    color: var(--sena-blue);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-action-outline:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+/* Rejilla de Métricas KPI */
+.kpi-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.kpi-metric-card {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    border-left-width: 4px;
+}
+
+.kpi-metric-card.border-accent-blue { border-left-color: var(--sena-blue); }
+.kpi-metric-card.border-accent-green { border-left-color: var(--sena-green); }
+.kpi-metric-card.border-accent-orange { border-left-color: var(--sena-orange); }
+.kpi-metric-card.border-accent-teal { border-left-color: #0f766e; }
+
+.kpi-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.kpi-icon-wrap.icon-blue { background: rgba(0, 50, 77, 0.08); color: var(--sena-blue); }
+.kpi-icon-wrap.icon-green { background: rgba(57, 169, 0, 0.1); color: var(--sena-green); }
+.kpi-icon-wrap.icon-orange { background: rgba(255, 107, 0, 0.1); color: var(--sena-orange); }
+.kpi-icon-wrap.icon-teal { background: #ccfbf1; color: #0f766e; }
+
+.kpi-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.kpi-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.04em;
+}
+
+.kpi-value {
+    font-size: 1.45rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.kpi-value.text-blue { color: var(--sena-blue); }
+.kpi-value.text-green { color: var(--sena-green-hover); }
+.kpi-value.text-orange { color: var(--sena-orange); }
+.kpi-value.text-teal { color: #0f766e; font-size: 1.15rem; }
+
+.kpi-unit {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.kpi-hint {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+/* Tabla del Historial */
+.history-table-card {
+    padding: 20px;
+}
+
+.history-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+}
+
+.history-table-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+    margin: 0;
+}
+
+.history-table-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 2px 0 0 0;
+}
+
+.history-count-pill {
+    background: #f1f5f9;
+    color: var(--sena-blue);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 99px;
+    border: 1px solid var(--border-light);
+}
+
+.history-table-responsive {
+    overflow-x: auto;
+}
+
+.history-data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 6px;
+}
+
+.history-data-table th {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.05em;
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.history-table-row {
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    transition: background 0.15s ease;
+}
+
+.history-table-row:hover {
+    background: #f8fafc;
+}
+
+.history-table-row.row-currently-active {
+    background: #f0fdf4;
+    border-left: 3px solid #22c55e;
+}
+
+.history-table-row td {
+    padding: 12px;
+    font-size: 0.85rem;
+    vertical-align: middle;
+}
+
+.cell-date strong {
+    color: var(--sena-blue);
+    font-weight: 700;
+}
+
+.date-badge-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.time-stamp-val {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.status-live-pulse-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #dcfce7;
+    color: #15803d;
+    padding: 3px 8px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.duration-meter-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    max-width: 110px;
+}
+
+.duration-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #334155;
+}
+
+.mini-progress-track {
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.mini-progress-fill {
+    height: 100%;
+    background: var(--sena-green);
+    border-radius: 99px;
+}
+
+.history-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+.empty-state-icon-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(0, 50, 77, 0.05);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+.history-empty-state h4 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+    margin: 0 0 8px;
+}
+
+.history-empty-state p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin: 0;
+}
+
+/* ========================================================
+   REGLAS PARA IMPRESIÓN DEL CARNÉ VIRTUAL (@media print)
+   ======================================================== */
+@media print {
+    body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .navbar, .footer, .bottom-nav-mobile, .no-print, .carnet-top-actions, .carnet-guide-card {
+        display: none !important;
+    }
+
+    .carnet-view-wrapper {
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .sena-id-card-frame {
+        margin: 20mm auto !important;
+    }
+
+    .sena-id-card {
+        box-shadow: none !important;
+        border: 1px solid #000000 !important;
+        page-break-inside: avoid;
+    }
+
+    .card-header-institutional {
+        background: #00324D !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+/* ========================================================
+   CLASES UTILITARIAS Y MEJORAS VISUALES UI/UX (CERO INLINE CSS)
+   ======================================================== */
+.stat-highlight-time {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+    letter-spacing: -0.02em;
+}
+
+.btn-nowrap {
+    white-space: nowrap !important;
+}
+
+.cell-align-right {
+    text-align: right !important;
+}
+
+.d-inline {
+    display: inline !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.stat-unit-sm {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.stat-max-sub {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.ranking-track {
+    height: 6px !important;
+    margin: 4px 0 0 !important;
+}
+
+.input-btn-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.live-pulse-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.table-user-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-avatar-initial {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--sena-green-subtle);
+    color: var(--sena-green-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.time-pill-in {
+    background: #f1f5f9;
+    color: var(--sena-blue);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.82rem;
+}
+
+/* ========================================================
+   ELIMINACIÓN DE SPINNERS/FLECHAS EN INPUTS DE IDENTIFICACIÓN
+   ======================================================== */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+input[type=number],
+.input-no-spin {
+    -moz-appearance: textfield !important;
+    appearance: textfield !important;
+}
+
+/* ========================================================
+   CONTROL DE SONIDO Y NOTIFICACIÓN TOAST EN MONITOR
+   ======================================================== */
+.btn-sound-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    color: var(--sena-blue);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.btn-sound-toggle:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: var(--sena-blue-dark);
+}
+
+.btn-sound-toggle:active {
+    transform: scale(0.98);
+}
+
+.entry-toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    color: var(--sena-blue);
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 1px solid #86efac;
+    box-shadow: 0 10px 25px rgba(0, 50, 77, 0.15), 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-size: 0.88rem;
+    opacity: 0;
+    transform: translateY(-15px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+.entry-toast.toast-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-indicator-pulse {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    flex-shrink: 0;
+}
+
+.toast-text-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.toast-text-box strong {
+    font-size: 0.85rem;
+    color: #15803d;
+}
+
+.toast-text-box span {
+    font-size: 0.8rem;
+    color: #334155;
+}
+
+/* ========================================================
+   PÁGINAS DE ERROR (404 / 500)
+   ======================================================== */
+.error-page-wrap {
+    max-width: 540px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.error-card-box {
+    padding: 40px 24px;
+}
+
+.error-code-badge {
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--sena-green);
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+}
+
+.error-code-500 {
+    color: var(--sena-orange) !important;
+}
+
+.error-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+    margin: 0 0 10px 0;
+}
+
+.error-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.error-actions-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* =============================================================================
+   MÓDULO DE GESTIÓN DE PASANTES / ENTRENADORES DE SALA (INSTRUCTOR ENCARGADO)
+   ============================================================================= */
+.grid-2-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.section-banner-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--sena-blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.75rem;
+}
+
+.staff-list-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.staff-card-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.staff-card-item:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.staff-card-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.staff-card-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #e0f2fe;
+    color: #0369a1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.staff-card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.staff-card-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--sena-blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.staff-card-meta {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.staff-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-subtle-action {
+    background: #f1f5f9;
+    border: 1px solid var(--border-light);
+    color: #334155;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-subtle-action:hover {
+    background: #e2e8f0;
+    color: var(--sena-blue);
+}
+
+.btn-subtle-danger {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.btn-subtle-danger:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+.badge-status-active {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 12px;
+}
+
+.badge-status-inactive {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 12px;
+}
+
+/* =============================================================================
+   OPTIMIZACIÓN RESPONSIVE GLOBAL (MÓVIL, TABLET Y PANTALLAS PEQUEÑAS)
+   ============================================================================= */
+@media (max-width: 860px) {
+    .grid-2-cols {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .flat-grid-2 {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .user-category-selector {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+
+    .category-pill {
+        padding: 0.6rem 0.4rem;
+    }
+
+    .kpi-metrics-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.65rem;
+    }
+
+    .staff-card-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .staff-card-actions {
+        width: 100%;
+        justify-content: flex-end;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 8px;
+    }
+}
+
+@media (max-width: 440px) {
+    .kpi-metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-qr-validation-module {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .card-qr-instructions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sena-id-card {
+        border-radius: 14px;
+    }
+
+    .card-body-content {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .card-profile-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .card-user-identification {
+        align-items: center;
+    }
+
+    .card-category-badge {
+        align-self: center;
+    }
+
+    .history-profile-card {
+        padding: 14px;
+    }
+}
+
+
+
+
