@@ -21,6 +21,15 @@ use GymSena\Services\AccessService;
 
 date_default_timezone_set('America/Bogota');
 
+// Preservar estado limpio de base de datos para producción al ejecutar pruebas
+$jsonStoragePath = dirname(__DIR__) . '/data/gymsena_local.json';
+$initialBackup = file_exists($jsonStoragePath) ? file_get_contents($jsonStoragePath) : null;
+register_shutdown_function(function() use ($jsonStoragePath, $initialBackup) {
+    if ($initialBackup !== null) {
+        file_put_contents($jsonStoragePath, $initialBackup);
+    }
+});
+
 echo "========================================================\n";
 echo "🧪 INICIANDO SUITE DE PRUEBAS DE SOFTWARE - GymSENA\n";
 echo "========================================================\n\n";

@@ -11,3 +11,4 @@ Thumbs.db
 # Logs
 *.log
 data/sessions/
+public/images/qr_learner_*.svg
