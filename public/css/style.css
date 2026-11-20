@@ -1424,6 +1424,28 @@ a:hover {
     background-color: var(--sena-green) !important;
 }
 
+.confirm-entry-prompt {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.85rem;
+    text-align: center;
+}
+
+.confirm-prompt-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #166534;
+    margin: 0 0 0.2rem 0;
+}
+
+.confirm-prompt-sub {
+    font-size: 0.82rem;
+    color: #15803d;
+    margin: 0;
+}
+
 /* =============================================================================
    7. Adaptación Móvil
    ============================================================================= */

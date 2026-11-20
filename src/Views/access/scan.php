@@ -92,9 +92,13 @@
                             <span>Registrar Mi Salida</span>
                         </button>
                     <?php else: ?>
+                        <div class="confirm-entry-prompt">
+                            <p class="confirm-prompt-title">¿Deseas ingresar al gimnasio?</p>
+                            <p class="confirm-prompt-sub">Confirma tu acceso para registrar tu entrada y actualizar el aforo.</p>
+                        </div>
                         <button type="submit" class="flat-btn-action btn-checkin-action">
                             <svg class="ui-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                            <span>Registrar Mi Entrada</span>
+                            <span>Sí, Registrar Mi Entrada</span>
                         </button>
                     <?php endif; ?>
                 </form>
@@ -112,12 +116,63 @@
                 </div>
 
                 <div class="text-center mt-3">
-                    <a href="/logout-aprendiz" class="flat-link-subtle">
+                    <a href="/logout-aprendiz" class="flat-link-subtle" onclick="try{localStorage.removeItem('gymsena_doc');}catch(e){}">
                         ¿No eres <?= htmlspecialchars(explode(' ', $learner['nombre'] ?? $learner['nombres'])[0]) ?>? Cambiar documento
                     </a>
                 </div>
             </section>
+            <script>
+                try {
+                    localStorage.setItem('gymsena_doc', <?= json_encode($learner['documento']) ?>);
+                } catch(e) {}
+            </script>
         <?php else: ?>
+
+            <!-- Contenedor Dinámico para Usuario Reconocido desde Almacenamiento Local (Evita re-digitar cédula) -->
+            <section class="flat-card flat-recognized-box hidden" id="storageRecognizedBox">
+                <div class="flat-user-row">
+                    <div class="flat-user-avatar" id="storageUserAvatar">U</div>
+                    <div class="flat-user-meta">
+                        <span class="flat-greeting" id="storageUserCategory">Aprendiz SENA</span>
+                        <h3 id="storageUserName">Usuario</h3>
+                        <p class="text-muted" id="storageUserMeta"></p>
+                    </div>
+                </div>
+
+                <!-- Estado Actual en Sala -->
+                <div class="current-status-strip" id="storageStatusStrip">
+                    <span class="status-indicator-dot" id="storageStatusDot"></span>
+                    <span id="storageStatusText"></span>
+                </div>
+
+                <form action="/procesar-acceso" method="POST" class="mt-3" id="storageAccessForm">
+                    <input type="hidden" name="gym_id" value="<?= $gymId ?>">
+                    <input type="hidden" name="documento_o_token" id="storageDocInput" value="">
+                    
+                    <div id="storageActionContainer">
+                        <!-- Inyectado por JS: botón de Salida o prompt de entrada -->
+                    </div>
+                </form>
+
+                <div class="user-quick-links mt-3">
+                    <a href="/carne" class="btn-subtle-pill">
+                        <svg class="ui-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-9 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 10H5v-1c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1z"/></svg>
+                        <span>Mi Carné Digital</span>
+                    </a>
+                    <a href="/historial" class="btn-subtle-pill">
+                        <svg class="ui-icon" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        <span>Mi Historial</span>
+                    </a>
+                </div>
+
+                <div class="text-center mt-3">
+                    <button type="button" class="btn-text-link flat-link-subtle" onclick="forgetStoredUser()">
+                        ¿No eres tú? Cambiar documento
+                    </button>
+                </div>
+            </section>
+
+            <div id="anonymousTabsContainer">
 
             <?php if (!empty($isNewUserDetected) || !empty($showRegistration)): ?>
                 <!-- Notificación Automática: Usuario Nuevo Detectado -->
@@ -325,6 +380,7 @@
                     </form>
                 </section>
             </div>
+            </div> <!-- Fin #anonymousTabsContainer -->
 
         <?php endif; ?>
 
@@ -482,4 +538,125 @@ function handleSmartAccessSubmit(e) {
     }
     return true;
 }
+
+function forgetStoredUser() {
+    try {
+        localStorage.removeItem('gymsena_doc');
+        localStorage.removeItem('gymsena_nombre');
+    } catch(e) {}
+    const box = document.getElementById('storageRecognizedBox');
+    if (box) box.classList.add('hidden');
+    const tabs = document.getElementById('anonymousTabsContainer');
+    if (tabs) tabs.classList.remove('hidden');
+    const tabIngreso = document.getElementById('tab-btn-ingreso');
+    if (tabIngreso) switchFlatTab('tab-ingreso', tabIngreso);
+}
+
+function showStorageRecognizedUser(data, doc) {
+    const box = document.getElementById('storageRecognizedBox');
+    const tabs = document.getElementById('anonymousTabsContainer');
+    if (!box) return;
+
+    if (tabs) tabs.classList.add('hidden');
+    box.classList.remove('hidden');
+
+    const avatar = document.getElementById('storageUserAvatar');
+    const nameEl = document.getElementById('storageUserName');
+    const catEl = document.getElementById('storageUserCategory');
+    const metaEl = document.getElementById('storageUserMeta');
+    const docInputEl = document.getElementById('storageDocInput');
+    const strip = document.getElementById('storageStatusStrip');
+    const dot = document.getElementById('storageStatusDot');
+    const statusText = document.getElementById('storageStatusText');
+    const actionContainer = document.getElementById('storageActionContainer');
+
+    if (avatar) avatar.textContent = (data.nombres || 'U').charAt(0).toUpperCase();
+    if (nameEl) nameEl.textContent = `${data.nombres} ${data.apellidos}`;
+    if (docInputEl) docInputEl.value = doc;
+
+    let catBadge = 'Aprendiz SENA';
+    if (data.tipo_usuario === 'INSTRUCTOR') catBadge = 'Instructor SENA';
+    else if (data.tipo_usuario === 'FUNCIONARIO') catBadge = 'Funcionario / Colaborador';
+    else if (data.tipo_usuario === 'INVITADO') catBadge = 'Invitado / Visitante';
+    if (catEl) catEl.textContent = catBadge;
+
+    if (metaEl) {
+        if (data.tipo_usuario === 'APRENDIZ') {
+            metaEl.textContent = `Ficha ${data.ficha || ''} • ${data.programa || ''}`;
+        } else {
+            metaEl.textContent = data.programa || 'Comunidad SENA';
+        }
+    }
+
+    if (data.is_inside) {
+        if (strip) strip.className = 'current-status-strip status-inside';
+        if (dot) dot.className = 'status-indicator-dot dot-green';
+        if (statusText) statusText.innerHTML = `<strong>Actualmente en sala</strong> • Ingresaste a las ${data.hora_entrada || ''}`;
+        if (actionContainer) {
+            actionContainer.innerHTML = `
+                <button type="submit" class="flat-btn-action btn-checkout-action">
+                    <svg class="ui-icon" viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                    <span>Registrar Mi Salida</span>
+                </button>
+            `;
+        }
+    } else {
+        if (strip) strip.className = 'current-status-strip status-outside';
+        if (dot) dot.className = 'status-indicator-dot dot-gray';
+        if (statusText) statusText.innerHTML = `<strong>Fuera del gimnasio</strong> • Listo para ingresar`;
+        if (actionContainer) {
+            actionContainer.innerHTML = `
+                <div class="confirm-entry-prompt">
+                    <p class="confirm-prompt-title">¿Deseas ingresar al gimnasio?</p>
+                    <p class="confirm-prompt-sub">Confirma tu acceso para registrar tu entrada y actualizar el aforo.</p>
+                </div>
+                <button type="submit" class="flat-btn-action btn-checkin-action">
+                    <svg class="ui-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    <span>Sí, Registrar Mi Entrada</span>
+                </button>
+            `;
+        }
+    }
+}
+
+// Inicialización inteligente al cargar la pantalla de acceso
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.search.includes('clear_storage=1')) {
+        try {
+            localStorage.removeItem('gymsena_doc');
+            localStorage.removeItem('gymsena_nombre');
+        } catch(e) {}
+    }
+
+    <?php if (!$learner): ?>
+    let storedDoc = null;
+    try {
+        storedDoc = localStorage.getItem('gymsena_doc');
+    } catch(e) {}
+
+    if (storedDoc) {
+        fetch(`/api/check-user?doc=${encodeURIComponent(storedDoc)}&gym=<?= $gymId ?>`)
+            .then(r => r.json())
+            .then(data => {
+                if (data.exists) {
+                    showStorageRecognizedUser(data, storedDoc);
+                } else {
+                    // Documento no encontrado en BD: limpiar y sugerir registro
+                    try { localStorage.removeItem('gymsena_doc'); } catch(e) {}
+                    const regTab = document.getElementById('tab-btn-registro');
+                    if (regTab) switchFlatTab('tab-registro', regTab);
+                }
+            })
+            .catch(() => {});
+    } else {
+        // Usuario nuevo en este dispositivo móvil: abrir directamente la pestaña de registro
+        <?php if (empty($suggestedDoc) && empty($showRegistration)): ?>
+        const regTab = document.getElementById('tab-btn-registro');
+        if (regTab) {
+            switchFlatTab('tab-registro', regTab);
+        }
+        <?php endif; ?>
+    }
+    <?php endif; ?>
+});
 </script>

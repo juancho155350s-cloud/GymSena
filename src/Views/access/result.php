@@ -130,4 +130,13 @@
             </div>
         </div>
     <?php endif; ?>
+
+    <?php if (!empty($result['learner']['documento'])): ?>
+    <script>
+        try {
+            localStorage.setItem('gymsena_doc', <?= json_encode($result['learner']['documento']) ?>);
+            localStorage.setItem('gymsena_nombre', <?= json_encode($result['learner']['nombres']) ?>);
+        } catch(e) {}
+    </script>
+    <?php endif; ?>
 </div>

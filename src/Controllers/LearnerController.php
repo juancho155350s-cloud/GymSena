@@ -111,7 +111,7 @@ class LearnerController
             'secure' => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
         ]);
         Auth::logout();
-        Response::redirect('/acceso?msg=sesion_cerrada');
+        Response::redirect('/acceso?msg=sesion_cerrada&clear_storage=1');
     }
 }
 
